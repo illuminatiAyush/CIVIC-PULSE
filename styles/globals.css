@@ -1,0 +1,156 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-playfair);
+  
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-border: hsl(var(--border));
+  --color-ring: hsl(var(--ring));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+}
+
+@layer base {
+  :root {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 25 100% 50%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 223 48% 7%;
+    --foreground: 0 0% 98%;
+    --card: 222 36% 11%;
+    --card-foreground: 0 0% 98%;
+    --border: 219 29% 15%;
+    --ring: 28 100% 50%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 223 48% 7%;
+    --muted: 219 29% 15%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 28 100% 50%;
+    --accent-foreground: 0 0% 100%;
+  }
+
+  * {
+    border-color: var(--color-border);
+  }
+
+body {
+  @apply bg-[#0F172A] text-foreground antialiased selection:bg-accent/30;
+  background: linear-gradient(135deg, #0F172A, #1E293B, #0A0F1C);
+  background-attachment: fixed;
+  min-height: 100vh;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("https://www.transparenttextures.com/patterns/carbon-fibre.png");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.grid-bg {
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.glass {
+  @apply bg-white/[0.03] border border-white/10 backdrop-blur-xl shadow-2xl;
+}
+
+.glass-glow {
+  @apply shadow-[0_0_40px_rgba(255,122,0,0.15)] border-accent/20;
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-white via-white/90 to-accent;
+}
+
+.section-divider {
+  @apply w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent relative;
+}
+
+.section-divider::before {
+  content: "";
+  @apply absolute left-1/2 -translate-x-1/2 -top-1 w-2 h-2 rounded-full bg-accent shadow-[0_0_10px_#FF7A00];
+}
+
+.flow-line {
+  @apply absolute left-1/2 -translate-x-1/2 w-px h-full bg-gradient-to-b from-accent/0 via-accent/20 to-accent/0 pointer-events-none;
+}
+
+@keyframes scan {
+  0% { transform: translateY(-100%); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(100%); opacity: 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  33% { transform: translateY(-10px) rotate(2deg); }
+  66% { transform: translateY(5px) rotate(-2deg); }
+}
+
+.animate-float {
+  animation: float 8s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+  .text-large {
+    font-size: 110% !important;
+  }
+  
+  .text-extra-large {
+    font-size: 125% !important;
+  }
+
+  .high-contrast {
+    filter: contrast(1.5) !important;
+  }
+
+  .focus-mode *:focus-visible {
+    outline: 3px solid hsl(var(--foreground)) !important;
+    outline-offset: 3px !important;
+  }
+}
